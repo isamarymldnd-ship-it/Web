@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservar cita | Arte en Tijeras</title>
+  <meta name="description" content="Reserva tu cita en Arte en Tijeras. Elige servicio, fecha y hora desde nuestro sitio web.">
+
+ <link rel="icon" type="image/x-icon" href="../html/img/Screenshot 2025-11-13 130627.png">
+ <link rel="stylesheet" href="css/diseno.css">
+
+</head>
+<body>
+  <header>
+    <img src="img/largo.png" alt="logo" style="height:50px;">
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="tienda.html">Shop</a>
+      <a href="membresia.html">Membership</a>
+        <a href="contacto.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <form id="formCita">
+      <h2>Reservar una cita</h2>
+      <label>Nombre completo: <input type="text" id="nombre" required></label>
+      <label>Teléfono: <input type="tel" id="telefono" required></label>
+      <label>Servicio:
+        <select id="servicio" required>
+          <option value="">Seleccione un servicio</option>
+          <optgroup label="Barberos">
+            <option>Corte de Caballero - $25</option>
+            <option>Cejas (hombres) - $3</option>
+            <option>Barba - $12</option>
+            <option>Facial - $18</option>
+            <option>Manicura (hombre) - $25</option>
+          </optgroup>
+          <optgroup label="Esteticista">
+            <option>Facial Básico - $35</option>
+            <option>Depilación de cejas - $12</option>
+            <option>Depilación de brazo - $6</option>
+            <option>Depilación de axila - $15</option>
+            <option>Facial Dermabrasión - $60</option>
+          </optgroup>
+        </select>
+      </label>
+      <label>Fecha: <input type="date" id="fecha" required></label>
+      <label>Hora: <input type="time" id="hora" required></label>
+      <button type="submit" class="btn">Confirmar cita</button>
+    </form>
+  </main>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h3>¡Cita confirmada!</h3>
+      <p id="detalleCita"></p>
+      <button class="btn" onclick="cerrarPopup()">Cerrar</button>
+    </div>
+  </div>
+
+  <footer>© 2025 Barbería Arte en Tijeras</footer>
+
+  <script>
+    const form=document.getElementById('formCita');
+    const popup=document.getElementById('popup');
+    const detalle=document.getElementById('detalleCita');
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const nombre=document.getElementById('nombre').value;
+      const servicio=document.getElementById('servicio').value;
+      const fecha=document.getElementById('fecha').value;
+      const hora=document.getElementById('hora').value;
+      detalle.textContent=`${nombre}, tu cita para ${servicio} está confirmada el ${fecha} a las ${hora}.`;
+      popup.style.display='flex';
+      form.reset();
+    });
+    function cerrarPopup(){popup.style.display='none';}
+  </script>
+</body>
+</html>

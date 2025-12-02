@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Galería | Arte en Tijeras</title>
+  <link rel="icon" type="image/x-icon" href="../html/img/Screenshot 2025-11-13 130627.png">
+  <link rel="stylesheet" href="css/diseno.css" />
+  <meta name="description" content="Galería de cortes y estilos - Arte en Tijeras" />
+  </head>
+<body>
+  <header><img src="img/largo.png" alt="logo" style="height:48px"><nav><a href="home.html" style="color:#fff;margin-left:10px">Home</a></nav></header>
+
+  <div class="filters" aria-label="Filtros">
+    <button data-filter="all">Todos</button>
+    <button data-filter="fade">Fade</button>
+    <button data-filter="beard">Barba</button>
+    <button data-filter="classic">Clásicos</button>
+  </div>
+
+  <div class="grid" id="gallery">
+    
+    <div class="card" data-cat="fade"><img src="img/IMG_9985.JPG" alt="Fade moderno"></div>
+    <div class="card" data-cat="beard"><img src="img/IMG_9986.JPG" alt="Perfilado de barba"></div>
+    <div class="card" data-cat="classic"><img src="img/IMG_9987.JPG" alt="Corte clásico"></div>
+    <div class="card" data-cat="fade"><img src="img/IMG_9988.JPG" alt="Fade con diseño"></div>
+    <div class="card" data-cat="beard"><img src="img/IMG_9989.JPG" alt="Barba completa"></div>
+    <div class="card" data-cat="classic"><img src="img/IMG_9990.JPG" alt="Corte tradicional"></div>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <span class="closeLB" id="closeLB">&times;</span>
+    <img id="lbImg" alt="">
+  </div>
+
+  <script>
+    // filtering
+    document.querySelectorAll('.filters button').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const f = btn.getAttribute('data-filter');
+        document.querySelectorAll('#gallery .card').forEach(card=>{
+          card.style.display = (f==='all' || card.dataset.cat===f) ? 'block' : 'none';
+        });
+      });
+    });
+
+    // lightbox
+    const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg');
+    document.querySelectorAll('.grid img').forEach(img=>{
+      img.addEventListener('click', ()=> {
+        lb.style.display = 'flex';
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+      });
+    });
+    document.getElementById('closeLB').onclick = ()=> lb.style.display = 'none';
+    lb.addEventListener('click', (e)=> { if (e.target===lb) lb.style.display='none'; });
+  </script>
+</body>
+</html>

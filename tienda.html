@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tienda | Arte en Tijeras</title>
+<meta name="description" content="Compra productos de barbería y estética masculina y femenina en la tienda de Arte en Tijeras.">
+<link rel="icon" type="image/x-icon" href="../html/img/Screenshot 2025-11-13 130627.png">
+<link rel="stylesheet" href="css/diseno.css">
+</head>
+<body>
+<header>
+  <img src="img/largo.png" alt="logo" style="height:50px">
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="cita.html">Appointment</a>
+    <a href="membresia.html">Membership</a>
+    <a href="contacto.html">Contact</a>
+  </nav>
+</header>
+
+<div class="section">
+  <h2>Nuestros Productos</h2>
+  <div class="shop-grid">
+    <div class="product">
+      <img src="img/b81ee51b-9b2c-4b10-8b78-966a150ed978.JPG" alt="Razor">
+      <h3>Feather Razor</h3><p>$5.00</p>
+      <button class="btn" onclick="addToCart('Feather Razor',5)">Agregar al carrito</button>
+    </div>
+    <div class="product">
+      <img src="img/c6164c6d-1f01-4244-b2ae-6ac914b60762.JPG" alt="Tint Bowl">
+      <h3>Tint Bowl</h3><p>$5.00</p>
+      <button class="btn" onclick="addToCart('Tint Bowl',5)">Agregar al carrito</button>
+    </div>
+    <div class="product">
+      <img src="img/f78b5071-212c-4ee7-af89-a51b8887c4e0.JPG" alt="Afro Pick">
+      <h3>Afro Pick</h3><p>$8.00</p>
+      <button class="btn" onclick="addToCart('Afro Pick',8)">Agregar al carrito</button>
+    </div>
+  </div>
+</div>
+
+<div id="cart" onclick="mostrarCarrito()"> Carrito</div>
+
+<div class="popup" id="popupCart">
+  <div class="popup-content">
+    <h3>Tu carrito</h3>
+    <ul id="cartList"></ul>
+    <p><strong>Total: $<span id="total">0</span></strong></p>
+    <button class="btn" onclick="cerrarCarrito()">Cerrar</button>
+  </div>
+</div>
+
+<footer>© 2025 Barbería Arte en Tijeras</footer>
+
+<script>
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+function addToCart(nombre, precio){
+  carrito.push({nombre,precio});
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  alert(`${nombre} añadido al carrito.`);
+}
+
+function mostrarCarrito(){
+  const popup=document.getElementById('popupCart');
+  const lista=document.getElementById('cartList');
+  const total=document.getElementById('total');
+  lista.innerHTML='';
+  let sum=0;
+  carrito.forEach(p=>{
+    const li=document.createElement('li');
+    li.textContent=`${p.nombre} - $${p.precio}`;
+    lista.appendChild(li);
+    sum+=p.precio;
+  });
+  total.textContent=sum.toFixed(2);
+  popup.style.display='flex';
+}
+function cerrarCarrito(){
+  document.getElementById('popupCart').style.display='none';
+}
+</script>
+</body>
+</html>

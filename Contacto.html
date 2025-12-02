@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contacto | Barbería Arte en Tijeras</title>
+  <meta name="description" content="Contacto y horarios - Barbería Arte en Tijeras. Reserva, consulta productos y pregunta por membresías." />
+  <link rel="icon" type="image/x-icon" href="../html/img/Screenshot 2025-11-13 130627.png">
+  <link rel="stylesheet" href="css/diseno.css" />
+</head>
+<body>
+  <header role="banner">
+    <img src="img/largo.png" alt="Arte en Tijeras - logo" style="height:48px">
+    <nav aria-label="Main navigation">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="tienda.html">Shop</a>
+      <a href="cita.html">Appointment</a>
+      <a href="membresia.html">Membership</a>
+      <a href="contacto.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Contacto</h1>
+    <p>Completa el formulario y te responderemos pronto. También puedes escribir por WhatsApp al número en la cabecera.</p>
+
+    <form id="contactForm" novalidate>
+      <label for="name">Nombre completo</label>
+      <input id="name" name="name" type="text" required aria-required="true" />
+      <div id="err-name" class="error" aria-live="polite"></div>
+
+      <label for="email">Correo electrónico</label>
+      <input id="email" name="email" type="email" required />
+      <div id="err-email" class="error" aria-live="polite"></div>
+
+      <label for="topic">Asunto</label>
+      <select id="topic" name="topic" required>
+        <option value="">-- Selecciona --</option>
+        <option>Reservas / Citas</option>
+        <option>Productos</option>
+        <option>Membresías</option>
+        <option>Otros</option>
+      </select>
+
+      <label for="message">Mensaje</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+      <div id="err-message" class="error" aria-live="polite"></div>
+
+      <div style="margin-top:18px;text-align:right">
+        <button type="submit" class="btn">Enviar mensaje</button>
+      </div>
+    </form>
+  </main>
+
+  <footer role="contentinfo">
+    <p>© 2025 Barbería Arte en Tijeras</p>
+  </footer>
+
+  <script>
+    // Validación simple y demo de envío de formulario
+    const form = document.getElementById('contactForm');
+    const showError = (id, msg) => document.getElementById(id).textContent = msg || '';
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let ok = true;
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const msg = form.message.value.trim();
+
+      if (name.length < 2) { showError('err-name','Ingresa tu nombre (mín. 2 caracteres)'); ok=false } else showError('err-name','');
+      const emailRE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRE.test(email)) { showError('err-email','Correo no válido'); ok=false } else showError('err-email','');
+      if (msg.length < 10) { showError('err-message','Escribe al menos 10 caracteres'); ok=false } else showError('err-message','');
+
+      if (!ok) return;
+
+      // simulación: mostrar confirmación y limpiar
+      alert(`Gracias ${name}! Tu mensaje ha sido enviado. Te contestaremos pronto.`);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
